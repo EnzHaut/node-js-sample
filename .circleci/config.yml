@@ -1,0 +1,23 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:18  # Utilise l'image Node.js officielle de CircleCI
+    steps:
+      - checkout  # Cloner le dépôt
+      - setup_remote_docker:  # Permet d'utiliser Docker
+          version: "20.10.7"  # Tu peux spécifier la version de Docker si nécessaire
+          docker_layer_caching: true
+      - run:
+          name: Build Docker image
+          command: docker build -t mon-app-node .
+      - run:
+          name: Docker images list
+          command: docker images
+
+workflows:
+  version: 2
+  build_and_push:
+    jobs:
+      - build
