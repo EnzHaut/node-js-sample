@@ -11,8 +11,8 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            docker build -t enzoropert66/mon-app-node:latest .
-            
+            docker build -t mon-app-node -f s9/node-js-sample/Dockerfile .
+
       - run:
           name: Test Docker container
           command: |
