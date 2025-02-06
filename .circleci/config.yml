@@ -6,8 +6,8 @@ jobs:
       - image: node:18  # Utilisation de l'image officielle Node.js
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker:  # Permet de démarrer Docker dans l'environnement
+          docker_layer_caching: true  # Permet d'utiliser le cache des couches Docker
       - run:
           name: Build Docker image
           command: docker build -t $DOCKER_USERNAME/mon-app-node .
