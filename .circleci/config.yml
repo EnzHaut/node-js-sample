@@ -3,23 +3,23 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: node:18  # Utilisation de l'image officielle Node.js
+      - image: node:18  # Image officielle de Node.js
     steps:
-      - checkout
-      - setup_remote_docker:  # Permet de démarrer Docker dans l'environnement
-          docker_layer_caching: true  # Permet d'utiliser le cache des couches Docker
+      - checkout  # Clone le dépôt
+      - setup_remote_docker:  # Permet d'activer Docker dans l'environnement CircleCI
+          docker_layer_caching: true  # Active le cache des couches Docker pour améliorer les performances
       - run:
           name: Build Docker image
-          command: docker build -t $DOCKER_USERNAME/mon-app-node .
+          command: docker build -t mon-app-node .  # Construire l'image Docker
       - run:
           name: Docker images list
-          command: docker images
+          command: docker images  # Liste les images Docker pour vérifier
       - run:
           name: Login to Docker Hub
           command: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - run:
           name: Push Docker image to Docker Hub
-          command: docker push $DOCKER_USERNAME/mon-app-node
+          command: docker push mon-app-node  # Pousse l'image sur Docker Hub
 
 workflows:
   version: 2
