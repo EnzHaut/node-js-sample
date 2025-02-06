@@ -1,21 +1,13 @@
 version: 2.1
-
+executors:
+  docker-executor:
+    machine:
+      image: ubuntu-2204:current
 jobs:
   build:
-    docker:
-      - image: node:18  # Utilise une image Node.js officielle
+    executor: docker-executor
     steps:
       - checkout  # Clone le dépôt dans l'environnement CircleCI
-
-      # Cette étape active Docker dans CircleCI
-      - setup_remote_docker:
-          docker_layer_caching: true  # Active le cache des couches Docker pour accélérer les builds
-
-      # Installer les dépendances du projet
-      - run:
-          name: Installer les dépendances
-          command: |
-            npm install --omit=dev
 
       # Construire l'image Docker avec le nom 'enzoropert66/mon-app-node'
       - run:
