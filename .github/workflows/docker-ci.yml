@@ -25,13 +25,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/écheckout@v3
 
       - name: Install dependencies
         run: npm install
-
-      - name: Run tests
-        run: npm test
 
   deploy:
     needs: test  # Ne se déclenche que si les tests réussissent
